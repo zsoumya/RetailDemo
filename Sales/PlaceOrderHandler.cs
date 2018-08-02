@@ -11,7 +11,10 @@
 
         public Task Handle(PlaceOrder message, IMessageHandlerContext context) {
             log.Info($"Received PlaceOrder, OrderId = {message.OrderId}");
-            return Task.CompletedTask;
+
+            return context.Publish(new OrderPlaced {
+                OrderId = message.OrderId
+            });
         }
     }
 }
