@@ -13,7 +13,10 @@
         private static async Task Main(string[] args) {
             Console.Title = "ClientUI";
             var endpointConfiguration = new EndpointConfiguration("ClientUI");
-            endpointConfiguration.UseTransport<LearningTransport>();
+            TransportExtensions<LearningTransport> transport = endpointConfiguration.UseTransport<LearningTransport>();
+
+            RoutingSettings<LearningTransport> routing = transport.Routing();
+            routing.RouteToEndpoint(typeof(PlaceOrder), "Sales");
 
             IEndpointInstance endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
 
@@ -41,7 +44,7 @@
 
                         // Send the command to the local endpoint
                         log.Info($"Sending PlaceOrder command, OrderId = {command.OrderId}");
-                        await endpointInstance.SendLocal(command).ConfigureAwait(false);
+                        await endpointInstance.Send(command).ConfigureAwait(false);
 
                         break;
                     case ConsoleKey.Q:

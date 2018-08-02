@@ -1,4 +1,4 @@
-﻿namespace ClientUI {
+﻿namespace Sales {
     using System.Threading.Tasks;
 
     using Messages;
