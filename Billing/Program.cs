@@ -1,13 +1,10 @@
-﻿using System;
-
-namespace Billing
-{
+﻿namespace Billing {
+    using System;
     using System.Threading.Tasks;
 
     using NServiceBus;
 
-    internal class Program
-    {
+    internal class Program {
         private static async Task Main() {
             Console.Title = "Billing";
 

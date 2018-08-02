@@ -11,10 +11,7 @@
 
         public Task Handle(OrderPlaced message, IMessageHandlerContext context) {
             log.Info($"Received OrderPlaced, OrderId = {message.OrderId} - Preparing for shipment");
-
-            return context.Publish(new OrderBilled {
-                OrderId = message.OrderId
-            });
+            return Task.CompletedTask;
         }
     }
 }

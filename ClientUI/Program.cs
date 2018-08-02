@@ -16,7 +16,7 @@
             TransportExtensions<LearningTransport> transport = endpointConfiguration.UseTransport<LearningTransport>();
 
             RoutingSettings<LearningTransport> routing = transport.Routing();
-            routing.RouteToEndpoint(typeof(PlaceOrder), "Sales");
+            routing.RouteToEndpoint(typeof (PlaceOrder), "Sales");
 
             IEndpointInstance endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
 
@@ -25,20 +25,16 @@
             await endpointInstance.Stop().ConfigureAwait(false);
         }
 
-        private static async Task RunLoop(IEndpointInstance endpointInstance)
-        {
-            while (true)
-            {
+        private static async Task RunLoop(IEndpointInstance endpointInstance) {
+            while (true) {
                 log.Info("Press 'P' to place an order, or 'Q' to quit.");
-                var key = Console.ReadKey();
+                ConsoleKeyInfo key = Console.ReadKey();
                 Console.WriteLine();
 
-                switch (key.Key)
-                {
+                switch (key.Key) {
                     case ConsoleKey.P:
                         // Instantiate the command
-                        var command = new PlaceOrder
-                        {
+                        var command = new PlaceOrder {
                             OrderId = Guid.NewGuid().ToString()
                         };
 

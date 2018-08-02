@@ -11,10 +11,7 @@
 
         public Task Handle(OrderBilled message, IMessageHandlerContext context) {
             log.Info($"Received OrderBilled, OrderId = {message.OrderId} - Shipping now!");
-
-            return context.Publish(new OrderBilled {
-                OrderId = message.OrderId
-            });
+            return Task.CompletedTask;
         }
     }
 }
